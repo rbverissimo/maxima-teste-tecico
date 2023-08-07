@@ -1,10 +1,61 @@
 <div class="container">
       <div class="row">
-            <form action="">
-                  <mat-form-field>
-                        <mat-label>Nome</mat-label>
-                        <input matInput placeholder="Nome do cliente">
-                  </mat-form-field>
-            </form>
+            <div class="col-md-8">
+                  <form>
+                        <mat-form-field style="width: 100%;">
+                              <mat-label>Nome</mat-label>
+                              <input matInput placeholder="Informe o nome do cliente">
+                        </mat-form-field>
+                  </form>
+            </div>
+            <div class="col-md-4">
+                  <form>
+                        <mat-form-field style="width: 100%;">
+                              <mat-label>CNPJ</mat-label>
+                              <input matInput placeholder="Informe o CNPJ">
+                        </mat-form-field>
+                  </form>
+            </div>
+      </div>
+      <div class="row">
+            <div class="col-md-3">
+                  <form>
+                        <mat-form-field style="width: 100%;">
+                              <mat-label>CEP</mat-label>
+                              <input required
+                              matInput 
+                              placeholder="Informe o CEP">
+                        </mat-form-field>
+                  </form>
+            </div>
+            <div class="col-md-6">
+                  <form>
+                        <mat-form-field style="width: 100%;">
+                              <mat-label>Logradouro</mat-label>
+                              <input required 
+                              matInput 
+                              placeholder="Informe o logradouro">
+                        </mat-form-field>
+                  </form>
+            </div>
+            <div class="col-md-3">
+                  <form>
+                        <mat-form-field style="width: 100%;">
+                              <mat-label>Número</mat-label>
+                              <input required 
+                              matInput 
+                              type="number" 
+                              placeholder="Informe o número">
+                        </mat-form-field>
+                  </form>
+            </div>
+      </div>
+      <div class="row" style="display: flex; justify-items: center;">
+            <button class="btn btn-primary botoes">Salvar</button>
+            
+            <button class="btn btn-danger botoes" 
+            (click)="onCancelarClick()">
+                  Cancelar
+            </button>
       </div>
 </div>

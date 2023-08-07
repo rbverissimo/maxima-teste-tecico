@@ -18,6 +18,9 @@ import { EditarClienteComponent } from './negocio/cadastro/editar-cliente/editar
 import { PaginaNaoEncontradaComponent } from './negocio/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { HeaderComponent } from './negocio/header/header.component';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -31,6 +34,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     BrowserModule,
+    RouterModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatToolbarModule,
@@ -40,7 +44,8 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

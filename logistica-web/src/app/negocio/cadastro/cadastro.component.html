@@ -1,39 +1,43 @@
-<div class="container">
-      <mat-paginator 
-            [length]="100" 
-            [pageSize]="10" 
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            [showFirstLastButtons]="true">
-      </mat-paginator>
-      <div class="row" style="padding-bottom: 0.5rem;">
-            <button mat-raised-button color="primary" 
-            style="margin-left: 1em; 
-            max-width: calc(15%);">Adicionar cliente</button>
+<div class="row">
+      <div class="col-md-12">
+            <mat-paginator 
+                  [length]="100" 
+                  [pageSize]="10" 
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                  [showFirstLastButtons]="true">
+            </mat-paginator>
+            <div class="row" style="padding-bottom: 0.5rem;">
+                  <button mat-raised-button color="primary" 
+                  style="margin-left: 1em; 
+                  max-width: calc(15%);"
+                  (click)="onAdicionarCliente()">Adicionar cliente</button>
+            </div>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                  <ng-container matColumnDef="codigo">
+                        <th mat-header-cell *matHeaderCellDef>Código</th>
+                        <td mat-cell *matCellDef="let elemento">{{elemento.codigo}}</td>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="nome">
+                        <th mat-header-cell *matHeaderCellDef>Nome</th>
+                        <td mat-cell *matCellDef="let elemento">{{elemento.nome}}</td>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="cnpj">
+                        <th mat-header-cell *matHeaderCellDef>CNPJ</th>
+                        <td mat-cell *matCellDef="let elemento">{{elemento.cnpj}}</td>
+                  </ng-container>
+      
+                  <ng-container matColumnDef="endereco">
+                        <th mat-header-cell *matHeaderCellDef>Endereço</th>
+                        <td mat-cell *matCellDef="let elemento">{{elemento.endereco['logradouro']}}</td>
+                  </ng-container>
+      
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
       </div>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <ng-container matColumnDef="codigo">
-                  <th mat-header-cell *matHeaderCellDef>Código</th>
-                  <td mat-cell *matCellDef="let elemento">{{elemento.codigo}}</td>
-            </ng-container>
-            
-            <ng-container matColumnDef="nome">
-                  <th mat-header-cell *matHeaderCellDef>Nome</th>
-                  <td mat-cell *matCellDef="let elemento">{{elemento.nome}}</td>
-            </ng-container>
-            
-            <ng-container matColumnDef="cnpj">
-                  <th mat-header-cell *matHeaderCellDef>CNPJ</th>
-                  <td mat-cell *matCellDef="let elemento">{{elemento.cnpj}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="endereco">
-                  <th mat-header-cell *matHeaderCellDef>Endereço</th>
-                  <td mat-cell *matCellDef="let elemento">{{elemento.endereco['logradouro']}}</td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
 </div>
+
+<router-outlet></router-outlet>
 
