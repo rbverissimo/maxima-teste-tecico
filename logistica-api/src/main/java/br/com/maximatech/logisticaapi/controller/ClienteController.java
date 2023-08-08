@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.maximatech.logisticaapi.model.Cliente;
 import br.com.maximatech.logisticaapi.service.ClienteService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 @RequestMapping("/api/cliente")
 public class ClienteController {
@@ -22,10 +22,12 @@ public class ClienteController {
 	@Autowired
 	private ClienteService service;
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/lista")
 	public List<Cliente> findAll(){
 		return service.findAll();
 	}
+	
 	
 	@PostMapping(
 				consumes=MediaType.APPLICATION_JSON_VALUE,
