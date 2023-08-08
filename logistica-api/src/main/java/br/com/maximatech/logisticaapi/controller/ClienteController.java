@@ -1,7 +1,10 @@
 package br.com.maximatech.logisticaapi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +14,16 @@ import br.com.maximatech.logisticaapi.model.Cliente;
 import br.com.maximatech.logisticaapi.service.ClienteService;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("api/cliente")
 public class ClienteController {
 	
 	@Autowired
 	private ClienteService service;
+	
+	@GetMapping("/lista")
+	public List<Cliente> findAll(){
+		return service.findAll();
+	}
 	
 	@PostMapping(
 				consumes=MediaType.APPLICATION_JSON_VALUE,

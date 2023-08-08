@@ -1,5 +1,6 @@
 package br.com.maximatech.logisticaapi.service;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,15 @@ public class ClienteService {
 	@Autowired
 	ClienteRepository repository;
 	
+	
+	public List<Cliente> findAll(){
+		
+		logger.info("Buscando todos os clientes do banco de dados!");
+		return repository.findAll();
+	}
+	
 	public Cliente create(Cliente cliente) {
-		logger.info("Inserindo cliente");
+		logger.info("Inserindo cliente no banco de dados!");
 		return repository.save(cliente);
 	}
 

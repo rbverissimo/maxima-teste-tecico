@@ -32,5 +32,9 @@ export class CadastroService {
     return this.http.post(this.apiUrl + '/cliente', data, {headers});
   }
 
+  getClientesLista(): Observable<Cliente[]>{
+    return this.http.get<Cliente[]>(`${this.apiUrl}/cliente/lista`)
+  }
+
 
 }
