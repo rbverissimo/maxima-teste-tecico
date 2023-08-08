@@ -6,9 +6,8 @@ import { PaginaNaoEncontradaComponent } from './negocio/pagina-nao-encontrada/pa
 
 const routes: Routes = [
   {path: '', redirectTo: '/cadastro', pathMatch: 'full'},
-  {path: 'cadastro', component: CadastroComponent, children: [
-    {path: 'novo', component: EditarClienteComponent }
-  ]},
+  {path: 'cadastro', component: CadastroComponent },
+  {path: 'cadastro/novo', component: EditarClienteComponent },
   {path: 'nao-encontrado', component: PaginaNaoEncontradaComponent},
   {path: '**', redirectTo: '/nao-encontrado' }
 ];
