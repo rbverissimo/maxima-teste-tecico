@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Cliente } from '../modelos/cliente.model';
 import { Endereco } from '../modelos/endereco.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { API_ENDPOINT } from '../app.constants';
+import { Observable } from 'rxjs';
 
 export interface Filtro {
   codigo: number;
@@ -15,32 +18,19 @@ export interface Filtro {
 })
 export class CadastroService {
 
-  CLIENTES_DATA: Cliente[] = [
-    new Cliente(
-      1, 
-      'Plásticos Melhoramentos', 
-      '00.000.000/0000-00', 
-      new Endereco(1, 'Rua 1', '74200-000', 'ED BUSINESS')
-    ),
-    new Cliente(
-      2,
-      'Lâmpadas Eletrônicos',
-      '11.111.111/111-11',
-      new Endereco(1, 'Rua 1', '74200-000', 'ED JAVA BUSINESS')
-    ),
-    new Cliente(
-      3,
-      'Acabamentos Soares',
-      '12.333.123/100-00',
-      new Endereco(1, 'Rua 4', '74200-130', '')
-    ),
-      new Cliente(
-      7,
-      'Assessoria Maxima',
-      '17.145.133/027-81',
-      new Endereco(1, 'Rua 1', '74200-000', 'ED BUSINESS')
-    )
-];
+  @Input() entidade: Cliente = new Cliente();
 
-  constructor() { }
+  private apiUrl = API_ENDPOINT;
+
+  constructor(private http: HttpClient) { }
+
+  salvar(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(this.apiUrl + '/cliente', data, {headers});
+  }
+
+
 }

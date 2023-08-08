@@ -21,10 +21,11 @@ export class CadastroComponent implements OnInit {
     private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.dataSource = this.cadastroService.CLIENTES_DATA;
+    
   }
 
   onAdicionarCliente() {
     this.router.navigate(['novo'], {relativeTo: this.route});
   }
+
 }

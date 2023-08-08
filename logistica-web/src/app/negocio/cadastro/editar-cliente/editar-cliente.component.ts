@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CadastroService } from '../../cadastro.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Cliente } from 'src/app/modelos/cliente.model';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -14,6 +15,18 @@ export class EditarClienteComponent {
 
   onCancelarClick() {
     this.router.navigate(['cadastro']);
+  }
+
+  onSalvarClick(entidade: Cliente){
+    this.cadastroService.salvar(entidade).subscribe(
+      data => {
+        
+      }, 
+      error => {
+        console.error(error);
+      }
+    );
+
   }
 
 }
