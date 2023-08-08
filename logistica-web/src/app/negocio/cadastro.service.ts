@@ -33,7 +33,7 @@ export class CadastroService {
   }
 
   getClientesLista(): Observable<Cliente[]>{
-    return this.http.get<Cliente[]>(`${this.apiUrl}/api/cliente/lista`)
+    return this.http.get<Cliente[]>(this.apiUrl + '/api/cliente/lista');
   }
 
 
