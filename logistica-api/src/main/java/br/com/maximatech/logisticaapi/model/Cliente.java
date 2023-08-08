@@ -2,6 +2,7 @@ package br.com.maximatech.logisticaapi.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,12 +28,16 @@ public class Cliente implements Serializable{
 	@Column(nullable = true, length = 18)
 	private String cnpj;
 	
-	@OneToOne
-	@JoinColumn(name = "endereco_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "endereco_id", referencedColumnName = "codigo")
 	private Endereco endereco;
 	
 	public Cliente() {
 		
+	}
+	
+	public Long getCodigo() {
+		return codigo;
 	}
 
 	public String getNome() {
@@ -50,7 +55,13 @@ public class Cliente implements Serializable{
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	
-	
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 	
 }

@@ -35,6 +35,10 @@ public class Endereco implements Serializable {
 	public Endereco() {
 		
 	}
+	
+	public Long getCodigo() {
+		return codigo;
+	}
 
 	public String getLogradouro() {
 		return logradouro;
