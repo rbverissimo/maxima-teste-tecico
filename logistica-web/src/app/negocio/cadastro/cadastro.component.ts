@@ -31,6 +31,7 @@ export class CadastroComponent implements OnInit {
   private getListaClientes(){
     this.cadastroService.getClientesLista().subscribe(
       data => {
+        console.log(data);
         this.dataSource = data;
       },
       error => {
