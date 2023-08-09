@@ -26,7 +26,7 @@ export class EditarClienteComponent implements OnInit {
 
   onCancelarClick() {
     this.router.navigate(['cadastro']);
-    this.cadastroService.entidade = new Cliente();
+    this.cadastroService.entidade = new Cliente('', '');
   }
 
   refreshLista(){
@@ -58,7 +58,7 @@ export class EditarClienteComponent implements OnInit {
   }
 
   adicionarClick(){
-    this.cadastroService.entidade = new Cliente();
+    this.cadastroService.entidade = new Cliente('', '');
   }
 
 }

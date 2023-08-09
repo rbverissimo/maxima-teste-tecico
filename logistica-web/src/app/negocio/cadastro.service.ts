@@ -22,7 +22,7 @@ export enum OperacaoCadastro {
 })
 export class CadastroService {
 
-  @Input() entidade: Cliente = new Cliente();
+  @Input() entidade: Cliente = new Cliente('', '');
 
   public operacao = OperacaoCadastro;
   public operacaoCadastro = this.operacao.NULL;
