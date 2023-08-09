@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/modelos/cliente.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
+import { UtilService } from 'src/app/utilitarios/util.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrosDialogComponent } from '../erros-dialog/erros-dialog.component';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -20,13 +23,18 @@ export class EditarClienteComponent implements OnInit {
   mapsLoaded: Observable<boolean>;
 
   constructor(public cadastroService: CadastroService, 
-    private router: Router, private route: ActivatedRoute, private httpClient: HttpClient){
+    private router: Router, private route: ActivatedRoute, 
+    private httpClient: HttpClient,
+    private utilService: UtilService,
+    public dialog: MatDialog){
+      
       this.mapsLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyDjOOmsUN7kOrfi1WtQkgJzX1HNzMMk9nU', 
       'callback')
       .pipe(
         map(() => true),
         catchError(() => of(false)),
       );
+
     }
 
     ngOnInit(): void {
@@ -47,13 +55,16 @@ export class EditarClienteComponent implements OnInit {
   onSalvarClick(entidade: Cliente){
     this.cadastroService.salvar(this.cadastroService.operacaoCadastro, entidade).subscribe(
       data => {
-        this.adicionarClick();
+        if(this.utilService.isErrosEncontrados(data)){
+          this.ocorreuErro = true;
+          this.openDialog();
+        } else {
+          this.adicionarClick();
+          this.onCancelarClick();
+        }
       }, 
       error => {
         console.error(error);
-      },
-      () => {
-        this.onCancelarClick();
       }
     );
   }
@@ -70,5 +81,11 @@ export class EditarClienteComponent implements OnInit {
 
   adicionarClick(){
     this.cadastroService.entidade = new Cliente('', '');
+  }
+
+  openDialog(){
+      this.dialog.open(ErrosDialogComponent, 
+        {data: 
+          { mensagem: "Erro ao salvar cliente. Confira se o endereço está correto"}});
   }
 }
