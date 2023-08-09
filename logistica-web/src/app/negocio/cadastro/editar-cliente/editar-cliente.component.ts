@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CadastroService, OperacaoCadastro } from '../../cadastro.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/modelos/cliente.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -15,8 +17,17 @@ export class EditarClienteComponent implements OnInit {
 
   ehAlterar: boolean = false;
 
+  mapsLoaded: Observable<boolean>;
+
   constructor(public cadastroService: CadastroService, 
-    private router: Router, private route: ActivatedRoute){}
+    private router: Router, private route: ActivatedRoute, private httpClient: HttpClient){
+      this.mapsLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyDjOOmsUN7kOrfi1WtQkgJzX1HNzMMk9nU', 
+      'callback')
+      .pipe(
+        map(() => true),
+        catchError(() => of(false)),
+      );
+    }
 
     ngOnInit(): void {
       if(this.cadastroService.operacaoCadastro === OperacaoCadastro.ALTERAR){
@@ -60,5 +71,4 @@ export class EditarClienteComponent implements OnInit {
   adicionarClick(){
     this.cadastroService.entidade = new Cliente('', '');
   }
-
 }
