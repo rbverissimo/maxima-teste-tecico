@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cliente } from 'src/app/modelos/cliente.model';
-import { Endereco } from 'src/app/modelos/endereco.model';
-import { CadastroService } from '../cadastro.service';
+import { CadastroService, OperacaoCadastro } from '../cadastro.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -25,19 +24,40 @@ export class CadastroComponent implements OnInit {
   }
 
   onAdicionarCliente() {
+    this.cadastroService.operacaoCadastro = OperacaoCadastro.INSERIR;
     this.router.navigate(['novo'], {relativeTo: this.route});
   }
 
   private getListaClientes(){
     this.cadastroService.getClientesLista().subscribe(
       data => {
-        console.log(data);
         this.dataSource = data;
       },
       error => {
         console.error(error);
       }
     );
+  }
+
+  private getCliente(codigo: number){
+    this.cadastroService.getCliente(codigo).subscribe(
+      (data: Cliente) => {
+        this.cadastroService.entidade = data;
+      },
+      (error: any) => {
+        console.error(error);
+      },
+      () => {
+        if(this.cadastroService.operacaoCadastro === OperacaoCadastro.ALTERAR){
+          this.router.navigate(['novo'], {relativeTo: this.route});
+        }
+      }
+    )
+  }
+
+  public alterarCliente(codigo: number){
+    this.cadastroService.operacaoCadastro = OperacaoCadastro.ALTERAR;
+    this.getCliente(codigo);
   }
 
 }
