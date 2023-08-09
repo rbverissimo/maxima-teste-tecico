@@ -34,10 +34,8 @@ export class EditarClienteComponent implements OnInit {
   }
 
   onSalvarClick(entidade: Cliente){
-    console.log(entidade);
     this.cadastroService.salvar(this.cadastroService.operacaoCadastro, entidade).subscribe(
       data => {
-        console.log(data);
         this.adicionarClick();
       }, 
       error => {

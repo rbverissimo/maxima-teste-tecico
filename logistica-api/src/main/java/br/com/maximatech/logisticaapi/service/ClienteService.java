@@ -11,7 +11,7 @@ import br.com.maximatech.logisticaapi.model.Cliente;
 import br.com.maximatech.logisticaapi.repositories.ClienteRepository;
 
 @Service
-public class ClienteService {
+public class ClienteService extends ClienteServiceBO {
 	
 	private Logger logger = Logger.getLogger(ClienteService.class.getName());
 	
@@ -22,6 +22,9 @@ public class ClienteService {
 	
 	public Cliente create(Cliente cliente) {
 		logger.info("Inserindo cliente no banco de dados!");
+		
+		if(!validar(cliente)) return new Cliente();
+		
 		return repository.save(cliente);
 	}
 
@@ -58,4 +61,31 @@ public class ClienteService {
 		
 		repository.delete(entity);
 	}
+}
+
+abstract class ClienteServiceBO {
+	
+	protected boolean validar(Cliente cliente) {
+		
+		boolean validacao = true;
+		
+		String cepCliente = cliente.getEndereco().getCep();
+		String logradouroCliente = cliente.getEndereco().getLogradouro();
+		String complementoCliente = cliente.getEndereco().getComplemento();
+		
+		if(cepCliente == null || cepCliente.equals("")) {
+			validacao = false;
+		}
+		
+		if(logradouroCliente == null || logradouroCliente.equals("")) {
+			validacao = false;
+		}
+		
+		if(complementoCliente == null || complementoCliente.equals("")) {
+			validacao = false;
+		}
+		
+		return validacao;
+	}
+	
 }
