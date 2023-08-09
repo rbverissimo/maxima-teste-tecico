@@ -1,6 +1,9 @@
 package br.com.maximatech.logisticaapi.model;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "clientes")
@@ -31,6 +35,10 @@ public class Cliente implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id", referencedColumnName = "codigo")
 	private Endereco endereco;
+	
+	@JsonInclude
+	@Transient
+	private List<String> listaErros;
 	
 	public Cliente() {
 		
@@ -62,6 +70,14 @@ public class Cliente implements Serializable{
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<String> getListaErros() {
+		return listaErros;
+	}
+
+	public void setListaErros(List<String> listaErros) {
+		this.listaErros = listaErros;
 	}
 	
 }

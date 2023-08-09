@@ -1,10 +1,12 @@
 package br.com.maximatech.logisticaapi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import br.com.maximatech.logisticaapi.exception.RecursoNaoEncontradoException;
 import br.com.maximatech.logisticaapi.model.Cliente;
@@ -67,6 +69,10 @@ abstract class ClienteServiceBO {
 	
 	protected boolean validar(Cliente cliente) {
 		
+		if(CollectionUtils.isEmpty(cliente.getListaErros())) {			
+			cliente.setListaErros(new ArrayList<>());
+		}
+		
 		boolean validacao = true;
 		
 		String cepCliente = cliente.getEndereco().getCep();
@@ -74,14 +80,20 @@ abstract class ClienteServiceBO {
 		String complementoCliente = cliente.getEndereco().getComplemento();
 		
 		if(cepCliente == null || cepCliente.equals("")) {
+			cliente.getListaErros()
+			.add("O CEP é inválido ou nulo. O CEP precisa ser declarado");
 			validacao = false;
 		}
 		
 		if(logradouroCliente == null || logradouroCliente.equals("")) {
+			cliente.getListaErros()
+				.add("O Logradouro é inválido ou nulo. O Logradouro precisa ser declarado");
 			validacao = false;
 		}
 		
 		if(complementoCliente == null || complementoCliente.equals("")) {
+			cliente.getListaErros()
+				.add("O Complemento é inválido ou nulo. O Complemento precisa ser declarado");
 			validacao = false;
 		}
 		

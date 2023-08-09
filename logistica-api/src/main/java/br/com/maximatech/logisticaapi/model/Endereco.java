@@ -23,6 +23,9 @@ public class Endereco implements Serializable {
 	@Column(nullable = false, length = 255)
 	private String logradouro;
 	
+	@Column(nullable = false)
+	private Integer numero;
+	
 	@Column(nullable = false, length = 9)
 	private String cep;
 	
@@ -46,6 +49,14 @@ public class Endereco implements Serializable {
 
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
+	}
+	
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 
 	public String getCep() {
