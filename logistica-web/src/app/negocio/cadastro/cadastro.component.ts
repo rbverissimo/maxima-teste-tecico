@@ -15,7 +15,7 @@ export class CadastroComponent implements OnInit {
   displayedColumns: string[] = ['codigo', 'nome', 'cnpj', 'endereco'];
   dataSource: Cliente[] = [];
 
-  constructor(private cadastroService: CadastroService, 
+  constructor(public cadastroService: CadastroService, 
     private router: Router, 
     private route: ActivatedRoute){}
 
