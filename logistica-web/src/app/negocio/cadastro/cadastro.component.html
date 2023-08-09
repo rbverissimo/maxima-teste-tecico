@@ -2,9 +2,11 @@
       <div class="col-md-12">
             <mat-paginator 
                   [length]="100" 
-                  [pageSize]="this.cadastroService.filtro.registrosPorPagina" 
-                  [pageSizeOptions]="[5, 10, 25, 100]"
-                  [showFirstLastButtons]="true">
+                  [pageSize]="cadastroService.filtro.registrosPorPagina" 
+                  [pageIndex]="cadastroService.filtro.pagina"
+                  [pageSizeOptions]="cadastroService.PAGE_SIZE_OPTIONS"
+                  [showFirstLastButtons]="true"
+                  (page)="getNext($event)">
             </mat-paginator>
             <div class="row" style="padding-bottom: 0.5rem;">
                   <button mat-raised-button color="primary" 

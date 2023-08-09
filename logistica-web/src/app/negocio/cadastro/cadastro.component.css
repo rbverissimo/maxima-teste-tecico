@@ -9,5 +9,5 @@ table {
 }
 
 .mat-mdc-row:hover .mat-mdc-cell {
-      border-color: currentColor;
+      background-color: #f7f5f8;
 }

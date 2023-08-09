@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -36,6 +38,12 @@ public class ClienteService extends ClienteServiceBO {
 		
 		logger.info("Buscando todos os clientes do banco de dados!");
 		return repository.findAll();
+	}
+	
+	
+	public Page<Cliente> findAll(int pagina, int registrosPorPagina){
+		Pageable pageable = PageRequest.of(pagina, registrosPorPagina);
+		return repository.findAll(pageable);
 	}
 	
 	

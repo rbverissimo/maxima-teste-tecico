@@ -40,6 +40,10 @@ public class Cliente implements Serializable{
 	@Transient
 	private List<String> listaErros;
 	
+	@JsonInclude
+	@Transient
+	private boolean ocorreuErro;
+	
 	public Cliente() {
 		
 	}

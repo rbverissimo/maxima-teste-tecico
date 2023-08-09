@@ -3,7 +3,7 @@ export interface Filtro {
     nome: string;
     cnpj: string;
     endereco: string;
-    paginaAtual: number;
+    pagina: number;
     registrosPorPagina: number;
   }
   

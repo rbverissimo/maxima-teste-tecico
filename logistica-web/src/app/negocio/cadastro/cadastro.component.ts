@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cliente } from 'src/app/modelos/cliente.model';
 import { CadastroService, OperacaoCadastro } from '../cadastro.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 
 
 
@@ -13,14 +14,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CadastroComponent implements OnInit {
 
   displayedColumns: string[] = ['codigo', 'nome', 'cnpj', 'endereco'];
-  dataSource: Cliente[] = [];
+  dataSource: any = [] ;
 
   constructor(public cadastroService: CadastroService, 
     private router: Router, 
     private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.getListaClientes();
+    this.cadastroService.filtro.registrosPorPagina = this.cadastroService.PAGE_SIZE_OPTIONS[0];
+    this.getClientesPaginados(this.cadastroService.filtro.pagina, this.cadastroService.filtro.registrosPorPagina);
   }
 
   onAdicionarCliente() {
@@ -58,6 +60,24 @@ export class CadastroComponent implements OnInit {
   public alterarCliente(codigo: number){
     this.cadastroService.operacaoCadastro = OperacaoCadastro.ALTERAR;
     this.getCliente(codigo);
+  }
+
+  getNext(event: PageEvent){
+    this.cadastroService.filtro.pagina = event.pageIndex;
+    this.cadastroService.filtro.registrosPorPagina = event.pageSize;
+    this.getClientesPaginados(this.cadastroService.filtro.pagina, this.cadastroService.filtro.registrosPorPagina);
+
+  }
+
+  private getClientesPaginados(pagina: any, registrosPorPagina: any){
+    this.cadastroService.getClientesPaginados(pagina, registrosPorPagina).subscribe(
+      (data) => {
+        this.dataSource = data;
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
 
 }

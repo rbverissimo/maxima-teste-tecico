@@ -10,7 +10,7 @@ export class Paginador implements Filtro{
   nome: string = '';
   cnpj: string = '';
   endereco: string = ''; 
-  paginaAtual: number = 1;
+  pagina: number = 0;
 
   constructor(public registrosPorPagina: number = PAGE_SIZE_OPTIONS[0]){}
 }
@@ -32,6 +32,7 @@ export class CadastroService {
   public operacaoCadastro = this.operacao.NULL;
 
   private apiUrl = API_ENDPOINT;
+  public PAGE_SIZE_OPTIONS = PAGE_SIZE_OPTIONS;
 
 
   constructor(private http: HttpClient) { }
@@ -63,12 +64,13 @@ export class CadastroService {
     return this.http.get<Cliente[]>(this.apiUrl + '/api/cliente/lista');
   }
 
-  getClientesPaginados(filtro: any){
-    let httpParams = new HttpParams();
-    Object.keys(filtro).forEach((key) => {
-      httpParams = httpParams.append(key, filtro[key]);
-    });
-    return this.http.get(this.apiUrl + 'api/cliente/lista-paginada', {params: httpParams});
+  getClientesPaginados(pagina: any, registrosPorPagina: any): Observable<Cliente[]>{
+    const params = {
+      pagina: pagina,
+      registrosPorPagina: registrosPorPagina,
+    };
+
+    return this.http.get<Cliente[]>(this.apiUrl + '/api/cliente/lista-paginada', {params});
   }
 
   exluir(codigo: number){
