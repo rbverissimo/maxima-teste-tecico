@@ -10,17 +10,21 @@ import { Cliente } from 'src/app/modelos/cliente.model';
 })
 export class EditarClienteComponent {
 
-  constructor(private cadastroService: CadastroService, 
+  constructor(public cadastroService: CadastroService, 
     private router: Router, private route: ActivatedRoute){}
 
   onCancelarClick() {
     this.router.navigate(['cadastro']);
   }
 
+  refreshLista(){
+    this.cadastroService.getClientesLista();
+  }
+
   onSalvarClick(entidade: Cliente){
     this.cadastroService.salvar(entidade).subscribe(
       data => {
-        
+        console.log(data);
       }, 
       error => {
         console.error(error);

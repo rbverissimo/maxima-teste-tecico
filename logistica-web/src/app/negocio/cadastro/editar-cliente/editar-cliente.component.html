@@ -1,53 +1,58 @@
 <div class="container" style="margin-top: 0.8rem;">
       <div class="row">
             <div class="col-md-8">
-                  <form>
+                  <div>
                         <mat-form-field style="width: 100%;">
                               <mat-label>Nome</mat-label>
-                              <input matInput placeholder="Informe o nome do cliente">
+                              <input matInput [(ngModel)]="this.cadastroService.entidade.nome" placeholder="Informe o nome do cliente">
                         </mat-form-field>
-                  </form>
+                  </div>
             </div>
             <div class="col-md-4">
-                  <form>
+                  <div>
                         <mat-form-field style="width: 100%;">
                               <mat-label>CNPJ</mat-label>
-                              <input matInput placeholder="Informe o CNPJ">
+                              <input matInput  [(ngModel)]="this.cadastroService.entidade.cnpj" placeholder="Informe o CNPJ">
                         </mat-form-field>
-                  </form>
+                  </div>
             </div>
       </div>
       <div class="row">
             <div class="col-md-3">
-                  <form>
+                  <div>
                         <mat-form-field style="width: 100%;">
                               <mat-label>CEP</mat-label>
-                              <input required
+                              <input 
+                              [(ngModel)]="this.cadastroService.entidade.endereco['cep']"
+                              required
                               matInput 
                               placeholder="Informe o CEP">
                         </mat-form-field>
-                  </form>
+                  </div>
             </div>
-            <div class="col-md-6">
-                  <form>
+            <div class="col-md-4">
+                  <div>
                         <mat-form-field style="width: 100%;">
                               <mat-label>Logradouro</mat-label>
-                              <input required 
+                              <input 
+                              [(ngModel)]="this.cadastroService.entidade.endereco['logradouro']"
+                              required 
                               matInput 
                               placeholder="Informe o logradouro">
                         </mat-form-field>
-                  </form>
+                  </div>
             </div>
-            <div class="col-md-3">
-                  <form>
+            <div class="col-md-5">
+                  <div>
                         <mat-form-field style="width: 100%;">
-                              <mat-label>Número</mat-label>
+                              <mat-label>Complemento</mat-label>
                               <input required 
+                              [(ngModel)]="this.cadastroService.entidade.endereco['complemento']"
                               matInput 
-                              type="number" 
-                              placeholder="Informe o número">
+                              type="text" 
+                              placeholder="Informe o complemento">
                         </mat-form-field>
-                  </form>
+                  </div>
             </div>
       </div>
       <div class="row" style="display: flex; justify-items: center;">
