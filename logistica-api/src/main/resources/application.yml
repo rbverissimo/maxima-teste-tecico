@@ -1,7 +1,7 @@
 spring: 
  datasource:
   driverClassName: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/logistica_api
+  url: jdbc:mysql://mysqldb:3306/logistica_api
   username: root
   password: 123456
  jpa:
