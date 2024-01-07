@@ -14,15 +14,19 @@ import { PageEvent } from '@angular/material/paginator';
 export class CadastroComponent implements OnInit {
 
   displayedColumns: string[] = ['codigo', 'nome', 'cnpj', 'endereco'];
-  dataSource: any = [] ;
+  dataSource: any = [];
+
+  tamanhoPaginator: number = 0;
 
   constructor(public cadastroService: CadastroService, 
     private router: Router, 
-    private route: ActivatedRoute){}
+    private route: ActivatedRoute){
+    }
 
   ngOnInit(): void {
     this.cadastroService.filtro.registrosPorPagina = this.cadastroService.PAGE_SIZE_OPTIONS[0];
     this.getClientesPaginados(this.cadastroService.filtro.pagina, this.cadastroService.filtro.registrosPorPagina);
+    this.tamanhoPaginator = this.getTamanhoPaginator(this.cadastroService.filtro.registrosPorPagina);
   }
 
   onAdicionarCliente() {
@@ -78,6 +82,10 @@ export class CadastroComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  private getTamanhoPaginator(registrosPorPagina: number): number {
+    return 100; 
   }
 
 }

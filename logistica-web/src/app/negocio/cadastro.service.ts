@@ -73,6 +73,14 @@ export class CadastroService {
     return this.http.get<Cliente[]>(this.apiUrl + '/api/cliente/lista-paginada', {params});
   }
 
+  getTamanhoPaginator(registrosPorPagina: number): Observable<number> {
+    const params = {
+      registrosPorPagina: registrosPorPagina
+    }
+
+    return this.http.get<number>(this.apiUrl + '/api/cliente/tamanhoPaginator', {params});
+  }
+
   exluir(codigo: number){
     return this.http.delete(this.apiUrl + "/api/cliente" + `/${codigo}`);
   }
