@@ -9,14 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import br.com.maximatech.logisticaapi.exception.RecursoNaoEncontradoException;
 import br.com.maximatech.logisticaapi.model.Cliente;
 import br.com.maximatech.logisticaapi.repositories.ClienteRepository;
 
 @Service
-public class ClienteService extends ClienteServiceBO {
+public class ClienteService {
 	
 	private Logger logger = Logger.getLogger(ClienteService.class.getName());
 	
@@ -27,8 +26,6 @@ public class ClienteService extends ClienteServiceBO {
 	
 	public Cliente create(Cliente cliente) {
 		logger.info("Inserindo cliente no banco de dados!");
-		
-		if(!validar(cliente)) return new Cliente();
 		
 		return repository.save(cliente);
 	}
